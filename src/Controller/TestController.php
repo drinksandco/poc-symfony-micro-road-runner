@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class TestController
+final class TestController
 {
-    public function __construct(private HttpClientInterface $client)
-    {
+    public function __construct(
+        private HttpClientInterface $client
+    ) {
     }
 
-    /**
-    * @Route("/foo", name="foo", methods={"GET"})
-    */
-    public function foo(): JsonResponse
+    public function __invoke(Request $request): Response
     {
         $response = $this->client->request('GET', 'http://external_api:8080/');
         return new JsonResponse($response->toArray());
     }
 }
+    
