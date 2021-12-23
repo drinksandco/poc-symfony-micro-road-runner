@@ -8,6 +8,8 @@ services:
     ports:
       - 8081:8081
     working_dir: /opt
+    environment:
+      XDEBUG_MODE: "off"
     volumes:
       - ./:/opt
     command: ['/usr/bin/rr', 'serve']
@@ -15,6 +17,9 @@ services:
     build: ./docker/php/
     ports:
       - 8080:8080
+    working_dir: /opt/external-api
+    environment:
+      XDEBUG_MODE: "off"
     volumes:
       - ./external-api/:/opt/external-api
     command: ["php", "/opt/external-api/test.php"]

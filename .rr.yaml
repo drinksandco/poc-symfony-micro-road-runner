@@ -1,8 +1,7 @@
 server:
-  # If you are using symfony 5.3+ and the new Runtime component:
-  # remove the previous `command` line above and uncomment the line below.
   command: "php public/index.php"
   env:
+    XDEBUG_MODE: off
     APP_ENV: "prod"
     APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
 
